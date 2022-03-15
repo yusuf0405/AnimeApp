@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">AnimeApp</string>
+    <string name="discover">Home</string>
+
+    <string name="delete" translatable="false">Delete</string>
+    <string name="quality_auto" translatable="false">Auto</string>
+    <string name="speed" translatable="false">1x</string>
+    <string name="released">Released:</string>
+    <string name="type">Type:</string>
+    <string name="status">Status:</string>
+    <string name="next_episode"><u>Next Episode</u>&gt;</string>
+    <string name="previous_episode">&lt;<u>Previous Episode</u></string>
+    <string name="back_button">Back Button</string>
+    <string name="search">Search</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+
+    <string name="favourite">Favourites</string>
+
+
+
+    <string name="favourite_transition">favourite_transition</string>
+    <string name="search_transition">search_transition</string>
+    <string name="castings">Castings</string>
+
+
+
+
+    <!--  Anime Details Strings -->
+    <string name="action_copy_title">Copy Title</string>
+    <string name="action_read_more">Read more</string>
+    <string name="toast_copy_title"> Copied</string>
+    <string name="action_share">Share</string>
+    <string name="action_remove">Remove</string>
+    <string name="content_favorited">Favorited</string>
+    <string name="content_episodes">Episodes</string>
+    <string name="content_private">Private</string>
+    <string name="content_rewatching">Rewatching</string>
+    <string name="content_rewatched">Rewatched</string>
+    <string name="content_rating">Rating</string>
+    <string name="content_my_rating">My rating</string>
+    <string name="title_remove">Remove</string>
+    <string name="content_remove_are_you_sure">Are you sure you\'d like to remove {anime-name} from your library?</string>
+    <string name="content_not_yet_aired">Not Yet Aired</string>
+    <string name="content_not_yet_rated">Not Yet Rated</string>
+    <string name="content_airing_since">Airing since</string>
+    <string name="content_will_air_on">Will air on</string>
+    <string name="content_will_start_airing_on">Will start airing on</string>
+    <string name="content_sharing_text">Check out {anime-name} at Hummingbird! {anime-url}</string>
+
+
+    <!-- Content -->
+    <string name="content_type">Type</string>
+    <string name="content_age_rating_guide">Age Rating Guide</string>
+    <string name="content_episode_count">Episode Count</string>
+    <string name="content_episode_start_date">Episode Start Date</string>
+    <string name="content_age_rating">Age Rating</string>
+
+
+    <string name="info_successfully_updated">Updated {anime-name}!</string>
+    <string name="rating">RATING</string>
+    <string name="genres">Genres</string>
+    <string name="description">Description</string>
+    <string name="back">Back</string>
+    <string name="no_data_string">Empty so far</string>
+    <string name="episode_item_title">Title:</string>
+    <string name="episode_item_season">Season:</string>
+    <string name="episode_item_series">Series:</string>
+    <string name="episode_item_duration">Duration:</string>
+    <string name="episode_item_create_at">Create At:</string>
+    <string name="episode_item_description">Description</string>
+</resources>

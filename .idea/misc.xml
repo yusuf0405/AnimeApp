@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.28888888888888886" />
+        <entry key="app/src/main/res/drawable/gradient_top.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_favorite_shimmer.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_icon_and_text.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_placeholder_no_text.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_search_shimmer.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_unfavorite.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/search_edit_text_background.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/selector_dark.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/selector_light.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/shadow_backgorund.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/shape_sub_dub.xml" value="0.199" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/anime_info_fragment.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/anime_item.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/episodes_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.18703703703703703" />
+        <entry key="app/src/main/res/layout/fragment_homde.xml" value="0.21164947509765625" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home_shimmer.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/fragment_info_anime.xml" value="0.18505221932114882" />
+        <entry key="app/src/main/res/layout/fragment_info_anime_shimmer.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/item_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_episodes.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_error.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/item_fav_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_no_data.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_people.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_progress.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/people_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/person_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/recycler_anime_common.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/recycler_anime_mini_header.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/recycler_anime_popular.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/recycler_anime_recent_sub_dub_2.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/recycler_episode_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/recycler_loading.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/shimmer_anime_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_favourite.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_home.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_info_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/shimmer_item_fav_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/tags_genre.xml" value="0.7703018188476562" />
+        <entry key="app/src/main/res/layout/toolbar_transparent.xml" value="0.2953125" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.2953125" />
+        <entry key="app/src/main/res/menu/menu_item.xml" value="0.2953125" />
+        <entry key="app/src/main/res/xml/motion_scene_animeinfo.xml" value="0.24537037037037038" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

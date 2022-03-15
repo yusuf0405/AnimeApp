@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#D3D1D1</color>
+    <color name="yellow">#D5C42F</color>
+    <color name="green">#7EC52C</color>
+    <color name="red">#E81313</color>
+    <color name="gold">#E4FF9800</color>
+    <color name="blue">#1565C0</color>
+    <color name="orange">#FF8F00</color>
+    <color name="colorPrimary">@color/header</color>
+    <color name="colorPrimaryDark">#3B3B44</color>
+    <color name="colorAccent">@color/header</color>
+
+    //Total Colors
+    <color name="app_background">#FFFFFF</color>
+    <color name="header">#212121</color>
+    <color name="text_default">#808080</color>
+    <color name="progress">#e5e5e5</color>
+    <color name="secondary_background">#EAEAEB</color>
+
+    //Home Fragment
+    <color name="home_header">@color/header</color>
+    <color name="home_icon">@color/header</color>
+    //Recycler Items
+    <color name="transparent_background">#80000000</color>
+    <color name="recycler_anime_title">@color/header</color>
+    <color name="recycler_anime_type">@color/text_default</color>
+    <color name="recycler_releases_date">@color/recycler_anime_type</color>
+    <color name="recycler_episode_number">@color/recycler_anime_type</color>
+    <color name="recycler_tags">@color/secondary_background</color>
+
+    //Recycler mini Header
+    <color name="recycler_mini_header_title">@color/text_default</color>
+    <color name="recycler_mini_header_see_more">@color/recycler_mini_header_title</color>
+    //Recycler Popular
+    <color name="anime_title">@color/home_header</color>
+
+    //Search Fragment
+    <color name="search_back">@color/favourite_back</color>
+
+
+    //Favourite
+    <color  name="favourite_header">@color/home_header</color>
+    <color name="favourite_back">@color/recycler_anime_title</color>
+    <color name="favourite_icon">#c9485b</color>
+
+    //Anime Info Fragment
+    <color name="info_back">@color/favourite_back</color>
+    <color name="info_anime_title">@color/recycler_anime_title</color>
+    <color name="info_meta">@color/text_default</color>
+    <color name="types_title">#776E6E</color>
+    <color name="types_value">#3D3838</color>
+
+    //AnimeInfo Episodes
+    <color name="episode_background">#f8f8f8</color>
+    <color name="episode_watched_progress">@color/progress</color>
+    <color name="episode_text">#776E6E</color>
+
+
+    //Media Player Controls
+    <color name="media_player_controls">#ffffff</color>
+    <color name="buffer_loading">#CCFFFFFF</color>
+    <color name="media_player_controls_background">#80000000</color>
+
+
+    //Shimmer Background
+    <color name="shimmer_background">#dddddd</color>
+
+
+
+    <color name="apptheme_primary">#ff5722</color>
+    <color name="apptheme_primary_lighter">#ffff6c38</color>
+    <color name="apptheme_primary_disabled">#80ff5722</color>
+    <color name="apptheme_primary_dark">#e64a19</color>
+    <color name="apptheme_accent">#ffff00</color>
+    <color name="apptheme_white_status_bar">#909090</color>
+
+    <color name="gradient_start">#70000000</color>
+    <color name="gradient_light_start">#30000000</color>
+
+    <color name="text_gray_dark">#CC000000</color>
+    <color name="text_gray">#656565</color>
+    <color name="text_gray_light">#858585</color>
+    <color name="text_dark">#99000000</color>
+    <color name="text_light">#ccffffff</color>
+    <color name="text_dialog_action">@color/text_gray_dark</color>
+
+    <color name="divider">#507a7a7a</color>
+    <color name="divider_light">#307a7a7a</color>
+
+    <!-- button_borderless_neutral.xml -->
+    <color name="button_neutral">#15000000</color>
+
+    <color name="neutral">#888888</color>
+    <color name="neutral_pressed">#666666</color>
+    <color name="neutral_darker">#555555</color>
+
+    <!-- Selectors -->
+    <color name="selector_light">#50ffffff</color>
+    <color name="selector_light_stroke">#70ffffff</color>
+    <color name="selector_dark">#30000000</color>
+    <color name="selector_dark_stroke">#50000000</color>
+
+    <color name="button_ps_background">@android:color/white</color>
+    <color name="button_ps_background_pressed">#90ffffff</color>
+    <color name="button_ps_background_disabled">#80ffffff</color>
+    <color name="button_ps_stroke_only_stroke">#90ffffff</color>
+    <color name="button_ps_stroke_only_stroke_disabled">#80ffffff</color>
+    <color name="button_ps_stroke_only_background_pressed">#40ffffff</color>
+
+    <color name="login_border">#dddddd</color>
+    <color name="login_btn">#b2dfdb</color>
+
+    <color name="window_background">#dddddd</color>
+
+    <!-- Card colors -->
+    <color name="card_content">#fafafa</color>
+    <color name="card_content_pressed">#ededed</color>
+    <color name="card_content_disabled">#ccfafafa</color>
+    <color name="card_stroke">#f4f4f4</color>
+    <color name="card_stroke_pressed">#e7e7e7</color>
+    <color name="card_stroke_disabled">#ccf4f4f4</color>
+
+    <color name="flat_button_bg">#EBEBEB</color>
+    <color name="button_disabled">#ffab40</color>
+    <color name="error_color">#ffdd0200</color>
+
+    <!-- List -->
+    <color name="list_selected">#EBEBEB</color>
+    <color name="list_text_color">#212121</color>
+
+    <color name="shimmerColor">#B8B8B8</color>
+
+
+</resources>

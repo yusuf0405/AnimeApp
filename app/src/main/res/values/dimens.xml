@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="anime_info_item_spacing">6dp</dimen>
+    <dimen name="anime_info_item_start_margin">20dp</dimen>
+    <dimen name="episode_offset_left">8dp</dimen>
+    <dimen name="episode_offset_right">20dp</dimen>
+    <dimen name="episode_offset_top">5dp</dimen>
+    <dimen name="episode_offset_bottom">5dp</dimen>
+        <!-- Default screen margins, per the Android Design guidelines. -->
+        <dimen name="activity_horizontal_margin">16dp</dimen>
+        <dimen name="activity_vertical_margin">16dp</dimen>
+
+        <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+             https://developer.android.com/design/patterns/navigation-drawer.html -->
+        <dimen name="navigation_drawer_width">300dp</dimen>
+        <dimen name="navigation_drawer_profile_height">144dp</dimen>
+        <dimen name="navigation_drawer_status_bar_height">0dp</dimen>
+
+
+        <dimen name="status_bar_placeholder_height">0dp</dimen>
+
+        <dimen name="action_bar_height">56dp</dimen>
+        <dimen name="action_bar_shadow_height">4dp</dimen>
+
+        <dimen name="margin_card_side">12dp</dimen>
+        <dimen name="margin_card_end">12dp</dimen>
+        <dimen name="margin_card_between">8dp</dimen>
+
+        <!-- Buttons -->
+        <dimen name="button_width">88dp</dimen>
+        <dimen name="button_height">36dp</dimen>
+
+        <!-- Anime Details Activity dimens -->
+
+        <dimen name="library_grid_spacing">4dp</dimen>
+
+        <dimen name="padding_side_library_grid">8dp</dimen>
+        <dimen name="padding_bottom_library_grid">8dp</dimen>
+        <!-- Anime Details Activity dimens -->
+        <dimen name="margin_details_card_side">12dp</dimen>
+        <dimen name="margin_details_cover_card_top">12dp</dimen>
+        <dimen name="height_header_image">216dp</dimen>
+        <dimen name="margin_top_header_image">8dp</dimen>
+        <dimen name="margin_left_header_image">0dp</dimen>
+
+        <!-- Library dimens -->
+        <dimen name="library_cover_height">224dp</dimen>
+        <dimen name="library_cover_width">148dp</dimen>
+
+
+</resources>
