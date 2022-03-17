@@ -3,6 +3,7 @@ package com.example.animeapp.app.di
 import com.example.animeapp.app.network.api.AnimeApi
 import com.example.animeapp.app.network.api.CustomApi
 import com.example.animeapp.app.utils.*
+import com.example.animeapp.app.utils.cons.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,20 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RetrofitModule {
-
-    @Provides
-    @Singleton
-    @AnimeHttpLoggingInterceptor
-    fun animeHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
-    @Provides
-    @Singleton
-    @Back4ttpLoggingInterceptor
-    fun back4appHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
+object RetrofitModule {
 
     @Provides
     @Singleton
@@ -65,10 +53,9 @@ class RetrofitModule {
     @Back4AppOkHttpClient
     fun back4AppOkHttpClient(
         @Back4AppRequestInterceptor requestInterceptor: Interceptor,
-        @Back4ttpLoggingInterceptor httpLoggingInterceptor: HttpLoggingInterceptor,
     ) = OkHttpClient.Builder()
         .addInterceptor(requestInterceptor)
-        .addInterceptor(httpLoggingInterceptor)
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
@@ -79,12 +66,11 @@ class RetrofitModule {
     @Singleton
     @AnimeOkHttpClient
     fun animeOkHttpClient(
-        @AnimeHttpLoggingInterceptor httpLoggingInterceptor: HttpLoggingInterceptor,
         @AnimeRequestInterceptor requestInterceptor: Interceptor,
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(requestInterceptor)
-            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(30, TimeUnit.SECONDS)
             .callTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

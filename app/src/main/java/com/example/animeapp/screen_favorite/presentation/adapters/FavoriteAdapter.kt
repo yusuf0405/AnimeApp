@@ -9,7 +9,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animeapp.R
-import com.example.animeapp.app.utils.ID_ANIME_DELETE
+import com.example.animeapp.app.utils.cons.ID_ANIME_DELETE
 import com.example.animeapp.app.utils.click_listener.FavoriteOnClickListener
 import com.example.animeapp.databinding.ItemFavAnimeBinding
 import com.example.animeapp.screen_home.domain.models.Anime

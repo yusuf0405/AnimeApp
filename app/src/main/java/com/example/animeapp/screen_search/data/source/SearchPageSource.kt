@@ -2,7 +2,7 @@ package com.example.animeapp.screen_search.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.animeapp.app.utils.MAX_PAGE_SIZE
+import com.example.animeapp.app.utils.cons.MAX_PAGE_SIZE
 import com.example.animeapp.app.utils.toAnime
 import com.example.animeapp.screen_home.domain.models.Anime
 import com.example.animeapp.screen_search.domain.repository.SearchRepository

@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import com.example.animeapp.R
 import com.example.animeapp.databinding.TagsGenreBinding
 
-class GenreTags(private val context: Context) {
+class  GenreTags(private val context: Context) {
 
     private val binding: TagsGenreBinding by lazy(LazyThreadSafetyMode.NONE) {
         TagsGenreBinding.bind(LayoutInflater.from(context).inflate(R.layout.tags_genre, null))

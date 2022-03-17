@@ -37,6 +37,7 @@
         <entry key="app/src/main/res/layout/item_error.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/item_fav_anime.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_no_data.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_no_favorite.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_people.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_progress.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/people_item.xml" value="0.2953125" />

@@ -2,23 +2,24 @@ package com.example.animeapp.screen_anime_info.presentation.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.animeapp.R
+import com.example.animeapp.app.base.BaseBindingFragment
+import com.example.animeapp.app.hideView
 import com.example.animeapp.app.network.models.categories.Categories
-import com.example.animeapp.app.utils.ANIME_KEY
-import com.example.animeapp.app.utils.BACK_TYRE_KEY
-import com.example.animeapp.app.utils.response.Status
+import com.example.animeapp.app.showView
 import com.example.animeapp.app.utils.assistant_nav.AssistantNav
+import com.example.animeapp.app.utils.cons.ANIME_KEY
+import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
 import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.app.utils.loader.LoadingDialog
+import com.example.animeapp.app.utils.response.Status
 import com.example.animeapp.app.utils.tags.GenreTags
 import com.example.animeapp.databinding.FragmentInfoAnimeBinding
 import com.example.animeapp.screen_anime_info.presentation.PeopleAdapter
@@ -33,11 +34,10 @@ import kotlinx.coroutines.launch
 
 @DelicateCoroutinesApi
 @AndroidEntryPoint
-class AnimeInfoFragment : Fragment(), View.OnClickListener {
+class AnimeInfoFragment :
+    BaseBindingFragment<FragmentInfoAnimeBinding>(FragmentInfoAnimeBinding::inflate),
+    View.OnClickListener {
 
-    val binding: FragmentInfoAnimeBinding by lazy(LazyThreadSafetyMode.NONE) {
-        FragmentInfoAnimeBinding.inflate(layoutInflater)
-    }
     private val viewModel: AnimeInfoFragmentViewModel by viewModels()
 
     private val anime: Anime by lazy(LazyThreadSafetyMode.NONE) {
@@ -68,14 +68,9 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View = binding.root
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         settingEpisodeAdapterAttributes()
         onClickListeners()
         observeRecourses()
@@ -85,22 +80,23 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(viev: View?) {
         when (viev) {
-            binding.episodesButton -> episodeButtonOnClick()
-            binding.favourite -> clickFavoriteButton()
+            requireBinding().episodesButton -> episodeButtonOnClick()
+            requireBinding().favourite -> clickFavoriteButton()
         }
     }
 
-    private fun onClickListeners(){
-        binding.favourite.setOnClickListener(this)
-        binding.episodesButton.setOnClickListener(this)
-        binding.toolbar.setNavigationOnClickListener { toolbarNavigation() }
+    private fun onClickListeners() {
+        requireBinding().favourite.setOnClickListener(this)
+        requireBinding().episodesButton.setOnClickListener(this)
+        requireBinding().toolbar.setNavigationOnClickListener { toolbarNavigation() }
     }
 
     private fun settingEpisodeAdapterAttributes() {
-        binding.episodesRecyclerView.adapter = episodesAdapter.withLoadStateHeaderAndFooter(
-            header = LoaderStateAdapter(),
-            footer = LoaderStateAdapter()
-        )
+        requireBinding().episodesRecyclerView.adapter =
+            episodesAdapter.withLoadStateHeaderAndFooter(
+                header = LoaderStateAdapter(),
+                footer = LoaderStateAdapter()
+            )
 
         episodesAdapter.addLoadStateListener { state ->
             if (state.refresh is LoadState.Error)
@@ -113,10 +109,10 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
     private fun episodeButtonOnClick() {
         if (!episodeVisibility) {
             episodeVisibility = true
-            binding.contentEpisodeRecycler.visibility = View.VISIBLE
+            requireBinding().contentEpisodeRecycler.showView()
         } else {
             episodeVisibility = false
-            binding.contentEpisodeRecycler.visibility = View.GONE
+            requireBinding().contentEpisodeRecycler.hideView()
         }
     }
 
@@ -141,24 +137,22 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
         viewModel.setFavImageRecourse.observe(viewLifecycleOwner) { setFavImageRecourse(status = it) }
         viewModel.peopleProgressBar.observe(viewLifecycleOwner) { showPeopleProgress(status = it) }
         viewModel.peopleList.observe(viewLifecycleOwner) {
-            if (isTypeAnime) binding.contentEpisodesButton.visibility = View.VISIBLE
+            if (isTypeAnime) requireBinding().contentEpisodesButton.isVisible = true
+
             lifecycleScope.launch {
                 viewModel.animeEpisodesFlow.collectLatest(episodesAdapter::submitData)
             }
             peopleAdapter.peopleList = it
         }
-
         viewModel.animeInfo.observe(viewLifecycleOwner) { resources ->
             when (resources.status) {
                 Status.LOADING -> {
-                    binding.shimmerLayout.startShimmer()
+                    requireBinding().shimmerLayout.startShimmer()
                 }
                 Status.SUCCESS -> {
                     bindUi(updateAnime = anime)
                     updateFlowCons(categories = resources.data!!)
                     showUi()
-
-
                 }
                 Status.ERROR -> {
                     showToast(resources.message.toString())
@@ -177,17 +171,16 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showPeopleProgress(status: Boolean) {
-        if (status) binding.peopleProgressBar.visibility = View.VISIBLE
-        else binding.peopleProgressBar.visibility = View.GONE
+        requireBinding().peopleProgressBar.isVisible = status
     }
 
     private fun setFavImageRecourse(status: Boolean) {
         if (status) {
             isFavorite = false
-            binding.favourite.setImageResource(R.drawable.ic_unfavorite)
+            requireBinding().favourite.setImageResource(R.drawable.ic_unfavorite)
         } else {
             isFavorite = true
-            binding.favourite.setImageResource(R.drawable.ic_favorite)
+            requireBinding().favourite.setImageResource(R.drawable.ic_favorite)
         }
     }
 
@@ -198,14 +191,14 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
 
     private fun checkingForFavorites(status: Boolean) {
         isFavorite = status
-        if (status) binding.favourite.setImageResource(R.drawable.ic_favorite)
-        else binding.favourite.setImageResource(R.drawable.ic_unfavorite)
+        if (status) requireBinding().favourite.setImageResource(R.drawable.ic_favorite)
+        else requireBinding().favourite.setImageResource(R.drawable.ic_unfavorite)
 
     }
 
     private fun updateFlowCons(categories: List<Categories>) {
         categories.forEach {
-            binding.animeDetailsFlowLayout.addView(
+            requireBinding().animeDetailsFlowLayout.addView(
                 GenreTags(context = requireContext()).getGenreTag(
                     genreName = it.attributes?.title!!
                 )
@@ -214,17 +207,17 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showUi() {
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
-        binding.allUiLayout.visibility = View.VISIBLE
+        requireBinding().shimmerLayout.stopShimmer()
+        requireBinding().shimmerLayout.hideView()
+        requireBinding().allUiLayout.showView()
     }
 
     @SuppressLint("SetTextI18n")
     private fun bindUi(updateAnime: Anime) {
         val anime = updateAnime.attributes!!
-        binding.animePersonsRecyclerView.adapter = peopleAdapter
+        requireBinding().animePersonsRecyclerView.adapter = peopleAdapter
         val infoReleased = anime.createdAt?.substring(0, 4)
-        binding.apply {
+        requireBinding().apply {
             toolbar.setNavigationIcon(R.drawable.ic_arrow)
             toolbar.title = anime.canonicalTitle ?: anime.titles?.enJp ?: anime.titles?.en
             animeInfoSummary.text = anime.description
@@ -238,6 +231,7 @@ class AnimeInfoFragment : Fragment(), View.OnClickListener {
             val rating = anime.averageRating!!.toDouble()
             animeDetailsCommunityRating.text = rating.toString()
             animeDetailsLibraryRatingAdvanced.progress = rating.toInt()
+
             if (anime.showType == "TV") {
                 isTypeAnime = true
                 animeDetailsType.text = "${anime.showType} Series"

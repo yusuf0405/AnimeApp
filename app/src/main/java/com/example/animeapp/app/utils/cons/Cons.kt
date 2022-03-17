@@ -1,4 +1,4 @@
-package com.example.animeapp.app.utils
+package com.example.animeapp.app.utils.cons
 
 const val ANIME_BASE_URL = "https://kitsu.io/api/edge/"
 const val MAX_PAGE_SIZE = 20

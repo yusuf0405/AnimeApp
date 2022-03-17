@@ -2,7 +2,7 @@ package com.example.animeapp.screen_favorite.data
 
 import com.example.animeapp.app.network.api.CustomApi
 import com.example.animeapp.app.network.models.anime.AnimeCustomResponse
-import com.example.animeapp.app.utils.BACK4APP_CONTENT_TYPE
+import com.example.animeapp.app.utils.cons.BACK4APP_CONTENT_TYPE
 import com.example.animeapp.app.utils.toAddAnimeType
 import com.example.animeapp.screen_favorite.domain.repository.FavoriteRepository
 import com.example.animeapp.screen_home.domain.models.Anime

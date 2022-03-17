@@ -1,23 +1,24 @@
 package com.example.animeapp.screen_home.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.animeapp.R
-import com.example.animeapp.app.utils.ANIME_KEY
-import com.example.animeapp.app.utils.BACK_TYRE_KEY
+import com.example.animeapp.app.base.BaseBindingFragment
+import com.example.animeapp.app.hideView
+import com.example.animeapp.app.showView
 import com.example.animeapp.app.utils.assistant_nav.AssistantNav
 import com.example.animeapp.app.utils.click_listener.AnimeOnClickListener
+import com.example.animeapp.app.utils.cons.ANIME_KEY
+import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
 import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.databinding.FragmentHomeBinding
 import com.example.animeapp.screen_home.domain.models.Anime
@@ -32,22 +33,15 @@ import kotlinx.coroutines.flow.collectLatest
 @DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class HomeFragment : Fragment(), AnimeOnClickListener, SwipeRefreshLayout.OnRefreshListener,
+class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+    AnimeOnClickListener, SwipeRefreshLayout.OnRefreshListener,
     View.OnClickListener {
 
-    private val binding: FragmentHomeBinding by lazy(LazyThreadSafetyMode.NONE) {
-        FragmentHomeBinding.inflate(layoutInflater)
-    }
     private val viewModel: HomeViewModel by viewModels()
 
     private val adapter: AnimeAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AnimeAdapter(actionListener = this)
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,15 +53,15 @@ class HomeFragment : Fragment(), AnimeOnClickListener, SwipeRefreshLayout.OnRefr
 
 
     private fun onClickListeners() {
-        binding.swipeRefresh.setOnRefreshListener(this)
-        binding.favorite.setOnClickListener(this)
-        binding.search.setOnClickListener(this)
+        requireBinding().swipeRefresh.setOnRefreshListener(this)
+        requireBinding().favorite.setOnClickListener(this)
+        requireBinding().search.setOnClickListener(this)
     }
 
     private fun showAllUi() {
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
-        binding.homeFragmentAllUi.visibility = View.VISIBLE
+        requireBinding().shimmerLayout.stopShimmer()
+        requireBinding().shimmerLayout.hideView()
+        requireBinding().homeFragmentAllUi.showView()
     }
 
     private fun setupTransitions(view: View) {
@@ -89,12 +83,13 @@ class HomeFragment : Fragment(), AnimeOnClickListener, SwipeRefreshLayout.OnRefr
         }
 
     private fun settingAdapterAttributes() {
-        binding.animeRv.adapter = adapter.withLoadStateHeaderAndFooter(
+        requireBinding().animeRv.itemAnimator = DefaultItemAnimator()
+        requireBinding().animeRv.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderStateAdapter(),
             footer = LoaderStateAdapter()
         )
         adapter.addLoadStateListener { state ->
-            if (state.refresh == LoadState.Loading) binding.shimmerLayout.startShimmer()
+            if (state.refresh == LoadState.Loading) requireBinding().shimmerLayout.startShimmer()
 
             if (state.refresh is LoadState.Error)
                 Toast.makeText(requireContext(),
@@ -102,7 +97,7 @@ class HomeFragment : Fragment(), AnimeOnClickListener, SwipeRefreshLayout.OnRefr
                     Toast.LENGTH_SHORT).show()
             else showAllUi()
         }
-        binding.swipeRefresh.setColorSchemeResources(
+        requireBinding().swipeRefresh.setColorSchemeResources(
             R.color.red,
             R.color.blue,
             R.color.green,
@@ -112,15 +107,18 @@ class HomeFragment : Fragment(), AnimeOnClickListener, SwipeRefreshLayout.OnRefr
 
     override fun onRefresh() {
         observeAnime()
-        binding.swipeRefresh.isRefreshing = true
-        binding.swipeRefresh.postDelayed({ binding.swipeRefresh.isRefreshing = false }, 1500)
+        requireBinding().swipeRefresh.isRefreshing = true
+        requireBinding().swipeRefresh.postDelayed({
+            requireBinding().swipeRefresh.isRefreshing = false
+        }, 1500)
     }
 
     override fun onClick(view: View) {
         when (view) {
-            binding.favorite -> findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
 
-            binding.search -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            requireBinding().favorite -> findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+
+            requireBinding().search -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
 

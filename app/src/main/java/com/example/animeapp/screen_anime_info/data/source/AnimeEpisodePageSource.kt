@@ -3,7 +3,7 @@ package com.example.animeapp.screen_anime_info.data.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.animeapp.app.network.models.episodes.Episodes
-import com.example.animeapp.app.utils.MAX_PAGE_SIZE
+import com.example.animeapp.app.utils.cons.MAX_PAGE_SIZE
 import com.example.animeapp.screen_anime_info.domain.repository.AnimeInfoRepository
 import retrofit2.HttpException
 

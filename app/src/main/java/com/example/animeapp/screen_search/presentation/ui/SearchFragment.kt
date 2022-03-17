@@ -1,24 +1,23 @@
 package com.example.animeapp.screen_search.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.animeapp.R
-import com.example.animeapp.app.utils.ANIME_KEY
+import com.example.animeapp.app.base.BaseBindingFragment
+import com.example.animeapp.app.utils.cons.ANIME_KEY
+import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
 import com.example.animeapp.app.utils.assistant_nav.AssistantNav
-import com.example.animeapp.app.utils.BACK_TYRE_KEY
-import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.app.utils.click_listener.AnimeOnClickListener
+import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.databinding.FragmentSearchBinding
 import com.example.animeapp.screen_home.domain.models.Anime
 import com.example.animeapp.screen_home.presentation.adapters.AnimeAdapter
@@ -31,11 +30,9 @@ import java.util.*
 @ExperimentalCoroutinesApi
 @DelicateCoroutinesApi
 @AndroidEntryPoint
-class SearchFragment : Fragment(), AnimeOnClickListener, SearchView.OnQueryTextListener {
+class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
+    AnimeOnClickListener, SearchView.OnQueryTextListener {
 
-    private val binding: FragmentSearchBinding by lazy(LazyThreadSafetyMode.NONE) {
-        FragmentSearchBinding.inflate(layoutInflater)
-    }
     private val viewModel: SearchViewModel by viewModels()
 
     private val adapter: AnimeAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -45,25 +42,19 @@ class SearchFragment : Fragment(), AnimeOnClickListener, SearchView.OnQueryTextL
         NoDataAdapter()
     }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View = binding.root
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerAdapter(status = false)
-        binding.searchEditText.setOnQueryTextListener(this)
+        requireBinding().searchEditText.setOnQueryTextListener(this)
 
-        GlobalScope.launch(Dispatchers.Main) { viewModel.searchFlow.collectLatest(adapter::submitData) }
+        lifecycleScope.launch { viewModel.searchFlow.collectLatest(adapter::submitData) }
 
 
-        binding.backButton.setOnClickListener {
+        requireBinding().backButton.setOnClickListener {
             findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
         }
+
         adapter.addLoadStateListener { state ->
             if (state.refresh is LoadState.Error)
                 Toast.makeText(requireContext(),
@@ -102,13 +93,15 @@ class SearchFragment : Fragment(), AnimeOnClickListener, SearchView.OnQueryTextL
 
     private fun setRecyclerAdapter(status: Boolean) {
         if (status) {
-            binding.searchRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-            binding.searchRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            requireBinding().searchRecyclerView.layoutManager =
+                GridLayoutManager(requireContext(), 3)
+            requireBinding().searchRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = LoaderStateAdapter(),
                 footer = LoaderStateAdapter())
         } else {
-            binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            binding.searchRecyclerView.adapter = noDataAdapter
+            requireBinding().searchRecyclerView.layoutManager =
+                LinearLayoutManager(requireContext())
+            requireBinding().searchRecyclerView.adapter = noDataAdapter
         }
 
     }
