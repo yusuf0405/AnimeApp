@@ -25,7 +25,7 @@ class HomeRepositoryImpl @Inject constructor(
 
     override fun createPagerAnime(): Flow<PagingData<Anime>> = Pager(
         config = PagingConfig(
-            pageSize = 20,
+            pageSize = 18,
             enablePlaceholders = false
         ),
         pagingSourceFactory = {

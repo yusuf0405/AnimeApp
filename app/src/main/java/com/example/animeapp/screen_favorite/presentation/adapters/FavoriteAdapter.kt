@@ -59,7 +59,7 @@ class FavoriteAdapter(private val actionListener: FavoriteOnClickListener) :
                 if (anime.attributes?.showType == "TV") animeFavType.text =
                     "${anime.attributes?.showType} Series"
                 val length = anime.attributes?.totalLength.toString()
-                episodeLengh.text = "Episodes: $length"
+                episodeLengh.text = "Duration: $length minutes"
                 val addedDate = anime.getCreatedAt()
                 createDate.text = "Added $addedDate"
 

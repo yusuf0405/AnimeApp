@@ -8,10 +8,8 @@ server [Back4App](https://www.back4app.com)
 [<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
 [<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
 [<img src="meta/android/screenshots/screenshot_4.png" width=160>](meta/android/screenshots/screenshot_4.png)
-[<img src="meta/android/screenshots/screenshot_5.png" width=160>](meta/android/screenshots/screenshot_5.png)
-[<img src="meta/android/screenshots/screenshot_6.png" width=160>](meta/android/screenshots/screenshot_6.png)
-[<img src="meta/android/screenshots/screenshot_7.png" width=160>](meta/android/screenshots/screenshot_7.png)
-[<img src="meta/android/screenshots/screenshot_8.png" width=160>](meta/android/screenshots/screenshot_8.png)
+[<img src="meta/android/gifs/shimmer_gif.GIF" width=240>](meta/android/gifs/shimmer_gif.GIF)
+
 
 ## Libraries
 
@@ -37,9 +35,9 @@ server [Back4App](https://www.back4app.com)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) Data objects that
   notify views of changes to the underlying database.
 
-*[Kotlin flows](https://developer.android.com/kotlin/flow) In coroutines, a flow is a type that can
-emit multiple values sequentially, as opposed to suspend functions that return only a single value.
-For example, you can use a flow to receive live updates from a database.
+* [Kotlin flows](https://developer.android.com/kotlin/flow) In coroutines, a flow is a type that can
+  emit multiple values sequentially, as opposed to suspend functions that return only a single
+  value. For example, you can use a flow to receive live updates from a database.
 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) Data related to
   the user interface that is not destroyed when the application is rotated. Easily schedule
