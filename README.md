@@ -4,10 +4,14 @@ An application that shows a list of anime and detailed information about them, t
 search, as well as add to favorites. The selected data is stored in a remote database on the
 server [Back4App](https://www.back4app.com)
 
-![image](https://firebasestorage.googleapis.com/v0/b/chat-app-90674.appspot.com/o/home_anime.png?alt=media&token=5a714902-fbfa-419f-9d4a-623def069dcb)
-![image](https://firebasestorage.googleapis.com/v0/b/chat-app-90674.appspot.com/o/favorite_anime.png?alt=media&token=4563817d-dfe1-4736-8d70-2253ec2adf44)
-![image](https://firebasestorage.googleapis.com/v0/b/chat-app-90674.appspot.com/o/anime_search.png?alt=media&token=ee5f6b35-51d2-4c25-a488-2f9b574a11b5)
-![image](https://firebasestorage.googleapis.com/v0/b/chat-app-90674.appspot.com/o/anime_details.png?alt=media&token=43563c7b-a05e-47f4-9141-0fcfff2607c3)
+[<img src="meta/android/screenshots/screenshot_1.png" width=160>](meta/android/screenshots/screenshot_1.png)
+[<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
+[<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
+[<img src="meta/android/screenshots/screenshot_4.png" width=160>](meta/android/screenshots/screenshot_4.png)
+[<img src="meta/android/screenshots/screenshot_5.png" width=160>](meta/android/screenshots/screenshot_5.png)
+[<img src="meta/android/screenshots/screenshot_6.png" width=160>](meta/android/screenshots/screenshot_6.png)
+[<img src="meta/android/screenshots/screenshot_7.png" width=160>](meta/android/screenshots/screenshot_7.png)
+[<img src="meta/android/screenshots/screenshot_8.png" width=160>](meta/android/screenshots/screenshot_8.png)
 
 ## Libraries
 
@@ -32,6 +36,10 @@ server [Back4App](https://www.back4app.com)
 
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) Data objects that
   notify views of changes to the underlying database.
+
+*[Kotlin flows](https://developer.android.com/kotlin/flow) In coroutines, a flow is a type that can
+emit multiple values sequentially, as opposed to suspend functions that return only a single value.
+For example, you can use a flow to receive live updates from a database.
 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) Data related to
   the user interface that is not destroyed when the application is rotated. Easily schedule

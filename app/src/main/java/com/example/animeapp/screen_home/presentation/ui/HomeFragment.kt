@@ -29,6 +29,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
@@ -53,15 +54,20 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
 
 
     private fun onClickListeners() {
-        requireBinding().swipeRefresh.setOnRefreshListener(this)
-        requireBinding().favorite.setOnClickListener(this)
-        requireBinding().search.setOnClickListener(this)
+        requireBinding().apply {
+            swipeRefresh.setOnRefreshListener(this@HomeFragment)
+            favorite.setOnClickListener(this@HomeFragment)
+            search.setOnClickListener(this@HomeFragment)
+        }
+
     }
 
     private fun showAllUi() {
-        requireBinding().shimmerLayout.stopShimmer()
-        requireBinding().shimmerLayout.hideView()
-        requireBinding().homeFragmentAllUi.showView()
+        requireBinding().apply {
+            shimmerLayout.stopShimmer()
+            shimmerLayout.hideView()
+            homeFragmentAllUi.showView()
+        }
     }
 
     private fun setupTransitions(view: View) {
@@ -77,31 +83,33 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
 
 
     private fun observeAnime() =
-        lifecycleScope.launchWhenStarted {
-            delay(3000)
+        lifecycleScope.launch {
             viewModel.animeSeasonFlow.collectLatest(adapter::submitData)
         }
 
     private fun settingAdapterAttributes() {
-        requireBinding().animeRv.itemAnimator = DefaultItemAnimator()
-        requireBinding().animeRv.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = LoaderStateAdapter(),
-            footer = LoaderStateAdapter()
-        )
-        adapter.addLoadStateListener { state ->
-            if (state.refresh == LoadState.Loading) requireBinding().shimmerLayout.startShimmer()
+        requireBinding().apply {
+            animeRv.itemAnimator = DefaultItemAnimator()
+            animeRv.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = LoaderStateAdapter(),
+                footer = LoaderStateAdapter()
+            )
+            adapter.addLoadStateListener { state ->
+                if (state.refresh == LoadState.Loading) shimmerLayout.startShimmer()
+                if (state.refresh != LoadState.Loading) showAllUi()
 
-            if (state.refresh is LoadState.Error)
-                Toast.makeText(requireContext(),
-                    (state.refresh as LoadState.Error).error.message ?: "",
-                    Toast.LENGTH_SHORT).show()
-            else showAllUi()
+                if (state.refresh is LoadState.Error)
+                    Toast.makeText(requireContext(),
+                        (state.refresh as LoadState.Error).error.message ?: "",
+                        Toast.LENGTH_SHORT).show()
+            }
+            swipeRefresh.setColorSchemeResources(
+                R.color.red,
+                R.color.blue,
+                R.color.green,
+                R.color.red)
         }
-        requireBinding().swipeRefresh.setColorSchemeResources(
-            R.color.red,
-            R.color.blue,
-            R.color.green,
-            R.color.red)
+
 
     }
 
@@ -115,12 +123,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
 
     override fun onClick(view: View) {
         when (view) {
-
             requireBinding().favorite -> findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
-
             requireBinding().search -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
-
-
 }

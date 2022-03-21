@@ -9,9 +9,11 @@ import androidx.paging.cachedIn
 import com.example.animeapp.screen_home.domain.models.Anime
 import com.example.animeapp.screen_search.domain.usecase.CreatePagerSearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -33,6 +35,7 @@ class SearchViewModel @Inject constructor(
                 createPagerAnimeUseCase.execute(query = _queryBy.value!!)
             }
             .cachedIn(viewModelScope)
+            .flowOn(Dispatchers.IO)
     }
 
     fun startSearch(query: String) {

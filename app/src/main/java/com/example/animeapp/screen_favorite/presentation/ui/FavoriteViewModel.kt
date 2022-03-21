@@ -10,6 +10,7 @@ import com.example.animeapp.screen_favorite.domain.usecase.GetAllFavoriteAnimeUs
 import com.example.animeapp.screen_home.domain.models.Anime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

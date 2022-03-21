@@ -11,7 +11,7 @@ import com.example.animeapp.databinding.ItemPeopleBinding
 import com.squareup.picasso.Picasso
 
 
-class PostsDiffCallBack(
+class PeopleDiffCallBack(
     private val oldList: List<People>,
     private val newList: List<People>,
 ) : DiffUtil.Callback() {
@@ -37,7 +37,7 @@ class PeopleAdapter() :
 
     var peopleList: List<People> = emptyList()
         set(newValue) {
-            val diffCallBack = PostsDiffCallBack(oldList = field, newList = newValue)
+            val diffCallBack = PeopleDiffCallBack(oldList = field, newList = newValue)
             val diffResult = DiffUtil.calculateDiff(diffCallBack)
             field = newValue
             diffResult.dispatchUpdatesTo(this)

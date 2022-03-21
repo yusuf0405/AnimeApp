@@ -535,18 +535,20 @@
                     android:id="@+id/content_episodes_button"
                     android:layout_width="match_parent"
                     android:visibility="gone"
+                    android:layout_marginBottom="15dp"
                     android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/episodes_button"
                         android:layout_width="200dp"
                         android:layout_marginTop="8dp"
+                        android:background="@drawable/ic_group_695"
                         android:layout_marginBottom="8dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:shadowColor="@color/apptheme_primary_dark"
-                        android:text="Episodes"
+                        android:text="@string/episodes"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -563,8 +565,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_episodes"
-                        />
+                        tools:listitem="@layout/item_episodes" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

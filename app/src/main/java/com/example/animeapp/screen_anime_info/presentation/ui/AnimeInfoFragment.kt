@@ -73,22 +73,25 @@ class AnimeInfoFragment :
 
         settingEpisodeAdapterAttributes()
         onClickListeners()
-        observeRecourses()
         viewModel.setAnimeId(id = anime.animeId)
+        observeRecourses()
         viewModel.checkIsFavorite(id = anime.animeId)
     }
 
-    override fun onClick(viev: View?) {
-        when (viev) {
+    override fun onClick(view: View?) {
+        when (view) {
             requireBinding().episodesButton -> episodeButtonOnClick()
             requireBinding().favourite -> clickFavoriteButton()
         }
     }
 
     private fun onClickListeners() {
-        requireBinding().favourite.setOnClickListener(this)
-        requireBinding().episodesButton.setOnClickListener(this)
-        requireBinding().toolbar.setNavigationOnClickListener { toolbarNavigation() }
+        requireBinding().apply {
+            favourite.setOnClickListener(this@AnimeInfoFragment)
+            episodesButton.setOnClickListener(this@AnimeInfoFragment)
+            toolbar.setNavigationOnClickListener { toolbarNavigation() }
+        }
+
     }
 
     private fun settingEpisodeAdapterAttributes() {
@@ -107,13 +110,17 @@ class AnimeInfoFragment :
     }
 
     private fun episodeButtonOnClick() {
-        if (!episodeVisibility) {
-            episodeVisibility = true
-            requireBinding().contentEpisodeRecycler.showView()
-        } else {
-            episodeVisibility = false
-            requireBinding().contentEpisodeRecycler.hideView()
+        requireBinding().apply {
+            if (!episodeVisibility) {
+                episodesButton
+                episodeVisibility = true
+                contentEpisodeRecycler.showView()
+            } else {
+                episodeVisibility = false
+               contentEpisodeRecycler.hideView()
+            }
         }
+
     }
 
     private fun toolbarNavigation() {
@@ -138,12 +145,12 @@ class AnimeInfoFragment :
         viewModel.peopleProgressBar.observe(viewLifecycleOwner) { showPeopleProgress(status = it) }
         viewModel.peopleList.observe(viewLifecycleOwner) {
             if (isTypeAnime) requireBinding().contentEpisodesButton.isVisible = true
-
-            lifecycleScope.launch {
-                viewModel.animeEpisodesFlow.collectLatest(episodesAdapter::submitData)
-            }
             peopleAdapter.peopleList = it
         }
+        lifecycleScope.launch {
+            viewModel.animeEpisodesFlow.collectLatest(episodesAdapter::submitData)
+        }
+
         viewModel.animeInfo.observe(viewLifecycleOwner) { resources ->
             when (resources.status) {
                 Status.LOADING -> {
@@ -207,9 +214,12 @@ class AnimeInfoFragment :
     }
 
     private fun showUi() {
-        requireBinding().shimmerLayout.stopShimmer()
-        requireBinding().shimmerLayout.hideView()
-        requireBinding().allUiLayout.showView()
+        requireBinding().apply {
+            shimmerLayout.stopShimmer()
+            shimmerLayout.hideView()
+            allUiLayout.showView()
+        }
+
     }
 
     @SuppressLint("SetTextI18n")

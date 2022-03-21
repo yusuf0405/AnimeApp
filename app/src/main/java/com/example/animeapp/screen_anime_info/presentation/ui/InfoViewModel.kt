@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.animeapp.app.network.models.categories.Categories
 import com.example.animeapp.app.network.models.episodes.Episodes
 import com.example.animeapp.app.network.models.people.People
@@ -19,8 +20,8 @@ import com.example.animeapp.screen_favorite.domain.usecase.GetFavoriteAnimeUseCa
 import com.example.animeapp.screen_home.domain.models.Anime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -62,6 +63,8 @@ class AnimeInfoFragmentViewModel @Inject constructor(
 
     val animeEpisodesFlow: Flow<PagingData<Episodes>> by lazy(LazyThreadSafetyMode.NONE) {
         createPagerAnimeEpisodeUseCase.execute(id = _animeId.value!!.toInt())
+            .cachedIn(viewModelScope)
+            .flowOn(Dispatchers.IO)
     }
 
     fun setAnimeId(id: String) {
@@ -70,7 +73,6 @@ class AnimeInfoFragmentViewModel @Inject constructor(
 
     fun checkIsFavorite(id: String) = viewModelScope.launch(Dispatchers.Main) {
         _animeInfo.value = Resource.loading(data = null)
-        delay(3000)
         try {
             val response =
                 withContext(Dispatchers.IO) { getFavoriteAnimeUseCase.execute(animeId = id) }
@@ -101,7 +103,6 @@ class AnimeInfoFragmentViewModel @Inject constructor(
                     val response =
                         withContext(Dispatchers.IO) { getAnimePeoplesUseCase.execute(id = it.id!!.toInt()) }
                     if (response.isSuccessful) {
-                        _peopleProgressBar.value = false
                         peopleList.add(response.body()!!.people)
                     } else {
                         _message.value = response.message()
@@ -114,6 +115,7 @@ class AnimeInfoFragmentViewModel @Inject constructor(
             _animeInfo.value = (Resource.error(data = null,
                 message = exception.message ?: "An error has occurred"))
         }
+        _peopleProgressBar.value = false
         _peopleList.value = peopleList
     }
 
