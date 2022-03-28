@@ -38,7 +38,6 @@
         android:minLines="2"
         android:maxLines="2"
         android:layout_marginTop="4dp"
-        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center"

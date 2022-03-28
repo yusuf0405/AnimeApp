@@ -9,11 +9,12 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animeapp.R
-import com.example.animeapp.app.utils.cons.ID_ANIME_DELETE
 import com.example.animeapp.app.utils.click_listener.FavoriteOnClickListener
+import com.example.animeapp.app.utils.cons.ID_ANIME_DELETE
 import com.example.animeapp.databinding.ItemFavAnimeBinding
 import com.example.animeapp.screen_home.domain.models.Anime
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class FavMoviesDiffCallBack(
     private val oldNotes: List<Anime>,
@@ -40,13 +41,19 @@ class FavMoviesDiffCallBack(
 
 class FavoriteAdapter(private val actionListener: FavoriteOnClickListener) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-    var favoriteAnimeList: List<Anime> = emptyList()
+    var favoriteAnimeList: MutableList<Anime> = LinkedList()
         set(newValue) {
             val diffCallBack = FavMoviesDiffCallBack(field, newValue)
             val diffResult = DiffUtil.calculateDiff(diffCallBack)
             field = newValue
             diffResult.dispatchUpdatesTo(this)
         }
+
+    fun deleteItem(item: Anime) {
+        val position = favoriteAnimeList.indexOf(item)
+        favoriteAnimeList.remove(item)
+        notifyItemRemoved(position)
+    }
 
     inner class FavoriteViewHolder(private val binding: ItemFavAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -93,7 +100,7 @@ class FavoriteAdapter(private val actionListener: FavoriteOnClickListener) :
 
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
-                ID_ANIME_DELETE -> actionListener.delete(objectId = anime.objectId!!)
+                ID_ANIME_DELETE -> actionListener.delete(anime = anime)
             }
             return@setOnMenuItemClickListener true
         }

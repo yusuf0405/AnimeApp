@@ -1,22 +1,19 @@
 package com.example.animeapp.screen_anime_info.presentation.ui
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.animeapp.R
-import com.example.animeapp.app.base.BaseBindingFragment
-import com.example.animeapp.app.hideView
+import com.example.animeapp.app.base.BaseFragment
+import com.example.animeapp.app.utils.extensions.hideView
 import com.example.animeapp.app.network.models.categories.Categories
-import com.example.animeapp.app.showView
-import com.example.animeapp.app.utils.assistant_nav.AssistantNav
-import com.example.animeapp.app.utils.cons.ANIME_KEY
-import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
+import com.example.animeapp.app.utils.extensions.showView
 import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.app.utils.loader.LoadingDialog
 import com.example.animeapp.app.utils.response.Status
@@ -35,19 +32,16 @@ import kotlinx.coroutines.launch
 @DelicateCoroutinesApi
 @AndroidEntryPoint
 class AnimeInfoFragment :
-    BaseBindingFragment<FragmentInfoAnimeBinding>(FragmentInfoAnimeBinding::inflate),
+    BaseFragment<FragmentInfoAnimeBinding, AnimeInfoFragmentViewModel>(FragmentInfoAnimeBinding::inflate),
     View.OnClickListener {
 
-    private val viewModel: AnimeInfoFragmentViewModel by viewModels()
+    override val viewModel: AnimeInfoFragmentViewModel by viewModels()
+
+    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val anime: Anime by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getSerializable(ANIME_KEY) as Anime
+        AnimeInfoFragmentArgs.fromBundle(requireArguments()).anime
     }
-
-    private val typeBack: AssistantNav by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getSerializable(BACK_TYRE_KEY) as AssistantNav
-    }
-
     private val episodesAdapter: AnimeEpisodesAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AnimeEpisodesAdapter()
     }
@@ -63,6 +57,7 @@ class AnimeInfoFragment :
     private var isTypeAnime = false
     private var episodeVisibility = false
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -70,6 +65,7 @@ class AnimeInfoFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         settingEpisodeAdapterAttributes()
         onClickListeners()
@@ -82,6 +78,7 @@ class AnimeInfoFragment :
         when (view) {
             requireBinding().episodesButton -> episodeButtonOnClick()
             requireBinding().favourite -> clickFavoriteButton()
+            requireBinding().episodesFabButton -> fabOnClick()
         }
     }
 
@@ -89,7 +86,15 @@ class AnimeInfoFragment :
         requireBinding().apply {
             favourite.setOnClickListener(this@AnimeInfoFragment)
             episodesButton.setOnClickListener(this@AnimeInfoFragment)
-            toolbar.setNavigationOnClickListener { toolbarNavigation() }
+            episodesFabButton.setOnClickListener(this@AnimeInfoFragment)
+            toolbar.setNavigationOnClickListener { viewModel.goBack() }
+        }
+
+    }
+
+    private fun fabOnClick() {
+        requireBinding().apply {
+            needScroll.post { needScroll.scrollTo(0, 2400) }
         }
 
     }
@@ -112,29 +117,15 @@ class AnimeInfoFragment :
     private fun episodeButtonOnClick() {
         requireBinding().apply {
             if (!episodeVisibility) {
-                episodesButton
                 episodeVisibility = true
                 contentEpisodeRecycler.showView()
+                fabOnClick()
             } else {
                 episodeVisibility = false
-               contentEpisodeRecycler.hideView()
+                contentEpisodeRecycler.hideView()
             }
         }
 
-    }
-
-    private fun toolbarNavigation() {
-        when (typeBack) {
-            AssistantNav.INFO_TO_HOME ->
-                findNavController().navigate(R.id.action_animeInfoFragment_to_homeFragment)
-
-            AssistantNav.INFO_TO_FAVORITE ->
-                findNavController().navigate(R.id.action_animeInfoFragment_to_favoriteFragment)
-
-            AssistantNav.INFO_TO_SEARCH ->
-                findNavController().navigate(R.id.action_animeInfoFragment_to_searchFragment)
-
-        }
     }
 
     private fun observeRecourses() {
@@ -163,7 +154,7 @@ class AnimeInfoFragment :
                 }
                 Status.ERROR -> {
                     showToast(resources.message.toString())
-                    toolbarNavigation()
+                    viewModel.goBack()
                 }
             }
         }
@@ -192,7 +183,7 @@ class AnimeInfoFragment :
     }
 
     private fun clickFavoriteButton() {
-        if (isFavorite) viewModel.deleteAnimeFavorite()
+        if (isFavorite)viewModel.deleteAnimeFavorite()
         else viewModel.addAnimeFavorite(anime = anime)
     }
 
@@ -259,6 +250,4 @@ class AnimeInfoFragment :
                 .into(animeDetailsCoverImage)
         }
     }
-
-
 }

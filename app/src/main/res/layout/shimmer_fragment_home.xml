@@ -23,16 +23,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_settings_24"
+        android:tint="@color/shimmerColor"
+        app:layout_constraintBottom_toBottomOf="@+id/favorite_shimmer"
+        app:layout_constraintEnd_toStartOf="@+id/favorite_shimmer"
+        app:layout_constraintTop_toTopOf="@+id/favorite_shimmer" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/search_shimmer"
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_marginEnd="8dp"
         android:padding="10dp"
-        android:src="@drawable/ic_search_shimmer"
+        android:src="@drawable/ic_search"
+        android:tint="@color/shimmerColor"
         android:transitionName="@string/search_transition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,12 +51,10 @@
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_marginEnd="8dp"
         android:padding="10dp"
-        android:src="@drawable/ic_favorite_shimmer"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/shimmerColor"
         android:transitionName="@string/favourite_transition"
         app:layout_constraintBottom_toBottomOf="@+id/search_shimmer"
         app:layout_constraintEnd_toStartOf="@id/search_shimmer"

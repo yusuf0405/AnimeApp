@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerShimmer"
+        app:layout_constraintTop_toBottomOf="@+id/topViewShimmer"
         app:layout_constraintVertical_bias="0.0">
 
         <include layout="@layout/shimmer_item_fav_anime" />
@@ -36,22 +36,7 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/headerShimmer"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:fontFamily="sans-serif-medium"
-        android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingTop="10dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="10dp"
-        android:text="@string/favourite"
-        android:textColor="@color/shimmer_background"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topViewShimmer" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/topViewShimmer"
@@ -66,12 +51,28 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:paddingStart="30dp"
+            android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:paddingEnd="20dp"
             android:paddingBottom="10dp">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="10dp"
+                android:text="@string/favourite"
+                android:textColor="@color/shimmerColor"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backShimmer"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/backShimmer"
@@ -82,11 +83,10 @@
                 android:focusable="true"
                 android:padding="4dp"
                 android:src="@drawable/ic_arrow"
-                android:tint="@color/shimmer_background"
+                android:tint="@color/shimmerColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

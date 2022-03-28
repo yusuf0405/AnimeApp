@@ -3,22 +3,19 @@ package com.example.animeapp.screen_home.presentation.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.animeapp.R
-import com.example.animeapp.app.base.BaseBindingFragment
-import com.example.animeapp.app.hideView
-import com.example.animeapp.app.showView
-import com.example.animeapp.app.utils.assistant_nav.AssistantNav
+import com.example.animeapp.app.base.BaseFragment
+import com.example.animeapp.app.utils.extensions.hideView
+import com.example.animeapp.app.utils.extensions.showView
 import com.example.animeapp.app.utils.click_listener.AnimeOnClickListener
-import com.example.animeapp.app.utils.cons.ANIME_KEY
-import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
 import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.databinding.FragmentHomeBinding
 import com.example.animeapp.screen_home.domain.models.Anime
@@ -27,18 +24,19 @@ import com.google.android.material.transition.MaterialFadeThrough
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate),
     AnimeOnClickListener, SwipeRefreshLayout.OnRefreshListener,
     View.OnClickListener {
 
-    private val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
+
+    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val adapter: AnimeAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AnimeAdapter(actionListener = this)
@@ -47,9 +45,19 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTransitions(view = view)
+        toggleDayNight()
         settingAdapterAttributes()
         onClickListeners()
         observeAnime()
+    }
+
+    private fun toggleDayNight() {
+        val currentMode = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getBoolean("theme", false)
+        lifecycleScope.launchWhenCreated {
+            if (currentMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
 
@@ -58,8 +66,16 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
             swipeRefresh.setOnRefreshListener(this@HomeFragment)
             favorite.setOnClickListener(this@HomeFragment)
             search.setOnClickListener(this@HomeFragment)
+            setting.setOnClickListener(this@HomeFragment)
         }
+    }
 
+    override fun onClick(view: View) {
+        when (view) {
+            requireBinding().favorite -> viewModel.goFavoriteFragment()
+            requireBinding().search -> viewModel.goSearchFragment()
+            requireBinding().setting -> viewModel.goSettingFragment()
+        }
     }
 
     private fun showAllUi() {
@@ -78,9 +94,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
     }
 
     override fun showAnimeInfo(anime: Anime) =
-        findNavController().navigate(R.id.action_homeFragment_to_animeInfoFragment,
-            bundleOf(ANIME_KEY to anime, BACK_TYRE_KEY to AssistantNav.INFO_TO_HOME))
-
+        viewModel.goAnimeInfoFragment(anime)
 
     private fun observeAnime() =
         lifecycleScope.launch {
@@ -109,8 +123,6 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
                 R.color.green,
                 R.color.red)
         }
-
-
     }
 
     override fun onRefresh() {
@@ -119,12 +131,5 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(FragmentHomeBindin
         requireBinding().swipeRefresh.postDelayed({
             requireBinding().swipeRefresh.isRefreshing = false
         }, 1500)
-    }
-
-    override fun onClick(view: View) {
-        when (view) {
-            requireBinding().favorite -> findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
-            requireBinding().search -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-        }
     }
 }

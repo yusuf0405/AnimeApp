@@ -8,7 +8,7 @@ interface AnimeOnClickListener {
 
 interface FavoriteOnClickListener {
 
-    fun delete(objectId: String)
+    fun delete(anime: Anime)
 
     fun showAnimeInfo(anime: Anime)
 }

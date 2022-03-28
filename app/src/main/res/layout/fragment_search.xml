@@ -10,7 +10,6 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/app_background"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +18,6 @@
         <LinearLayout
             android:id="@+id/searchLayout"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:elevation="10dp"
             android:orientation="horizontal"
@@ -32,21 +30,19 @@
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back_button"
                 android:padding="10dp"
                 android:scaleX="1"
                 android:scaleY="1"
-                android:src="@drawable/ic_arrow"
-                app:tint="@color/search_back" />
+                android:src="@drawable/ic_arrow"/>
 
             <SearchView
                 android:id="@+id/searchEditText"
                 android:layout_width="match_parent"
+                android:background="@android:color/transparent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/search_edit_text_background"
                 android:iconifiedByDefault="false"
                 android:inputType="textCapWords"
                 android:queryHint="@string/search" />

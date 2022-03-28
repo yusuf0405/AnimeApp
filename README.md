@@ -8,8 +8,11 @@ server [Back4App](https://www.back4app.com)
 [<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
 [<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
 [<img src="meta/android/screenshots/screenshot_4.png" width=160>](meta/android/screenshots/screenshot_4.png)
-[<img src="meta/android/gifs/shimmer_gif.GIF" width=240>](meta/android/gifs/shimmer_gif.GIF)
-
+[<img src="meta/android/screenshots/screenshot_5.png" width=160>](meta/android/screenshots/screenshot_5.png)
+[<img src="meta/android/screenshots/screenshot_6.png" width=160>](meta/android/screenshots/screenshot_6.png)
+[<img src="meta/android/screenshots/screenshot_7.png" width=160>](meta/android/screenshots/screenshot_7.png)
+[<img src="meta/android/gifs/shimmer_gif.GIF" width=240>](meta/android/gifs/shimmer.GIF)
+[<img src="meta/android/gifs/black_shimmer.GIF" width=240>](meta/android/gifs/black_shimmer.GIF)
 
 ## Libraries
 
@@ -20,6 +23,9 @@ server [Back4App](https://www.back4app.com)
 
 * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) An interface
   that automatically responds to lifecycle events.
+
+* [Preference](https://developer.android.com/jetpack/androidx/releases/preference) Build interactive
+  settings screens without needing to interact with device storage or manage the UI.
 
 * [Paging 2](https://developer.android.com/topic/libraries/architecture/paging) Swap Library helps
   to load and display small pieces of data at the same time. Downloading partial data on demand

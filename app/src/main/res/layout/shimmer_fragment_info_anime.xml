@@ -37,6 +37,8 @@
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
+                    android:background="@android:color/transparent"
+
                     android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     app:layout_collapseMode="pin"
@@ -90,6 +92,7 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
+                                    android:layout_marginTop="26dp"
                                     android:layout_width="120dp"
                                     android:layout_height="178dp"
                                     android:background="@color/shimmer_background"
@@ -292,7 +295,8 @@
                         android:focusable="true"
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
-                        android:src="@drawable/ic_favorite_shimmer"
+                        android:src="@drawable/ic_favorite"
+                        android:tint="@color/shimmerColor"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

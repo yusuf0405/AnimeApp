@@ -59,6 +59,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
+                    android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -76,9 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_details_cover_card_top"
                 android:layout_marginEnd="@dimen/margin_details_cover_card_top"
-                android:background="@android:color/white"
-                android:elevation="2dp"
                 android:orientation="vertical">
+
 
                 <FrameLayout
                     android:id="@+id/anime_details_info_holder"
@@ -346,8 +346,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="10dp"
-                                    app:srv_iconColor="@color/apptheme_primary"
-                                    android:layout_marginBottom="10dp" />
+                                    android:layout_marginBottom="10dp"
+                                    app:srv_iconColor="@color/apptheme_primary" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -382,7 +382,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_details_card_side"
                     android:layout_marginRight="@dimen/margin_details_card_side"
-                    android:background="@android:color/white"
                     android:elevation="2dp">
 
                     <LinearLayout
@@ -406,16 +405,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-condensed"
-                                    android:text="@string/content_age_rating"
-                                    android:textColor="@color/text_gray_dark" />
+                                    android:text="@string/content_age_rating" />
 
                                 <TextView
                                     android:id="@+id/anime_details_age_rating"
+                                    style="@style/type_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="sans-serif-condensed"
-                                    android:textColor="@color/text_gray" />
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -429,16 +426,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-condensed"
-                                    android:text="@string/content_age_rating_guide"
-                                    android:textColor="@color/text_gray_dark" />
+                                    android:text="@string/content_age_rating_guide" />
 
                                 <TextView
                                     android:id="@+id/anime_details_age_rating_guid"
+                                    style="@style/type_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="sans-serif-condensed"
-                                    android:textColor="@color/text_gray" />
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -458,16 +453,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-condensed"
-                                    android:text="@string/content_episode_count"
-                                    android:textColor="@color/text_gray_dark" />
+                                    android:text="@string/content_episode_count" />
 
                                 <TextView
                                     android:id="@+id/anime_details_episode_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
-                                    android:fontFamily="sans-serif-condensed"
-                                    android:textColor="@color/text_gray" />
+                                    style="@style/type_title" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -481,16 +474,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-condensed"
-                                    android:text="@string/content_episode_start_date"
-                                    android:textColor="@color/text_gray_dark" />
+                                    android:text="@string/content_episode_start_date" />
 
                                 <TextView
                                     android:id="@+id/anime_details_episode_start_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
-                                    android:fontFamily="sans-serif-condensed"
-                                    android:textColor="@color/text_gray" />
+                                    style="@style/type_title"/>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -527,25 +518,26 @@
                         android:id="@+id/people_progress_bar"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="8dp" />
+                        android:paddingBottom="8dp"
+                        android:visibility="gone" />
                 </LinearLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/content_episodes_button"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_height="wrap_content">
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/episodes_button"
                         android:layout_width="200dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/ic_group_695"
-                        android:layout_marginBottom="8dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/ic_group_695"
                         android:gravity="center"
                         android:shadowColor="@color/apptheme_primary_dark"
                         android:text="@string/episodes"
@@ -557,17 +549,28 @@
                 <LinearLayout
                     android:id="@+id/content_episode_recycler"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/episodes_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_episodes" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/episodes_fab_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_baseline_arrow_upward_24" />
                 </LinearLayout>
             </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

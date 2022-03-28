@@ -2,10 +2,10 @@ package com.example.animeapp.screen_anime_info.presentation.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.animeapp.app.base.BaseViewModel
 import com.example.animeapp.app.network.models.categories.Categories
 import com.example.animeapp.app.network.models.episodes.Episodes
 import com.example.animeapp.app.network.models.people.People
@@ -35,7 +35,7 @@ class AnimeInfoFragmentViewModel @Inject constructor(
     private val deleteAnimeUseCase: DeleteAnimeUseCase,
     private val getFavoriteAnimeUseCase: GetFavoriteAnimeUseCase,
     private val createPagerAnimeEpisodeUseCase: CreatePagerAnimeEpisodeUseCase,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _animeId: MutableLiveData<String> = MutableLiveData()
     private val _objectId: MutableLiveData<String> = MutableLiveData()
@@ -67,9 +67,9 @@ class AnimeInfoFragmentViewModel @Inject constructor(
             .flowOn(Dispatchers.IO)
     }
 
-    fun setAnimeId(id: String) {
-        _animeId.value = id
-    }
+    fun goBack() = navigateBack()
+
+    fun setAnimeId(id: String) { _animeId.value = id }
 
     fun checkIsFavorite(id: String) = viewModelScope.launch(Dispatchers.Main) {
         _animeInfo.value = Resource.loading(data = null)

@@ -6,6 +6,7 @@
     android:layout_marginTop="12dp"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
     android:elevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +17,6 @@
             android:id="@+id/animeFavCardView"
             android:layout_width="105dp"
             android:layout_height="180dp"
-            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="4dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +77,6 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="20dp"
             android:text="Episode: 12"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/fav_item_title" />
@@ -89,7 +88,6 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="20dp"
             android:text="Movie"
-            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/episode_lengh" />
 

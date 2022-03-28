@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.28888888888888886" />
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/item_background_holo_dark.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/gradient_top.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_e_commerce_02.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/ic_favorite_shimmer.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_icon_and_text.xml" value="0.156" />
@@ -20,22 +24,24 @@
         <entry key="app/src/main/res/drawable/shadow_backgorund.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/shape_sub_dub.xml" value="0.199" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1419141914191419" />
         <entry key="app/src/main/res/layout/anime_info_fragment.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/anime_item.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/episodes_item.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.18703703703703703" />
         <entry key="app/src/main/res/layout/fragment_homde.xml" value="0.21164947509765625" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.13354037267080746" />
         <entry key="app/src/main/res/layout/fragment_home_shimmer.xml" value="0.24814814814814815" />
-        <entry key="app/src/main/res/layout/fragment_info_anime.xml" value="0.18505221932114882" />
+        <entry key="app/src/main/res/layout/fragment_info_anime.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_info_anime_shimmer.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.16044776119402984" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item.xml" value="0.24814814814814815" />
-        <entry key="app/src/main/res/layout/item_anime.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/item_episodes.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_anime.xml" value="0.13479623824451412" />
+        <entry key="app/src/main/res/layout/item_episodes.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_error.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/item_fav_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_fav_anime.xml" value="0.13479623824451412" />
         <entry key="app/src/main/res/layout/item_no_data.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_no_favorite.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_people.xml" value="0.2953125" />
@@ -49,15 +55,16 @@
         <entry key="app/src/main/res/layout/recycler_episode_item.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/recycler_loading.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/shimmer_anime_item.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/shimmer_fragment_favourite.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/shimmer_fragment_home.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/shimmer_fragment_info_anime.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_favourite.xml" value="0.13479623824451412" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_home.xml" value="0.14726027397260275" />
+        <entry key="app/src/main/res/layout/shimmer_fragment_info_anime.xml" value="0.1" />
         <entry key="app/src/main/res/layout/shimmer_item_fav_anime.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/tags_genre.xml" value="0.7703018188476562" />
         <entry key="app/src/main/res/layout/toolbar_transparent.xml" value="0.2953125" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2953125" />
         <entry key="app/src/main/res/menu/menu_item.xml" value="0.2953125" />
         <entry key="app/src/main/res/xml/motion_scene_animeinfo.xml" value="0.24537037037037038" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.10617283950617284" />
       </map>
     </option>
   </component>

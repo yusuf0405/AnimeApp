@@ -3,17 +3,11 @@ package com.example.animeapp.screen_favorite.presentation.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.animeapp.R
-import com.example.animeapp.app.base.BaseBindingFragment
-import com.example.animeapp.app.hideView
-import com.example.animeapp.app.showView
-import com.example.animeapp.app.utils.assistant_nav.AssistantNav
+import com.example.animeapp.app.base.BaseFragment
+import com.example.animeapp.app.utils.extensions.hideView
+import com.example.animeapp.app.utils.extensions.showView
 import com.example.animeapp.app.utils.click_listener.FavoriteOnClickListener
-import com.example.animeapp.app.utils.cons.ANIME_KEY
-import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
 import com.example.animeapp.app.utils.loader.LoadingDialog
 import com.example.animeapp.app.utils.response.Status
 import com.example.animeapp.databinding.FragmentFavouriteBinding
@@ -24,10 +18,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoriteFragment :
-    BaseBindingFragment<FragmentFavouriteBinding>(FragmentFavouriteBinding::inflate),
+    BaseFragment<FragmentFavouriteBinding, FavoriteViewModel>(FragmentFavouriteBinding::inflate),
     FavoriteOnClickListener, View.OnClickListener {
 
-    private val viewModel: FavoriteViewModel by viewModels()
+
+    override val viewModel: FavoriteViewModel by viewModels()
+
+    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val adapter: FavoriteAdapter by lazy(LazyThreadSafetyMode.NONE) {
         FavoriteAdapter(actionListener = this)
@@ -38,21 +35,21 @@ class FavoriteFragment :
     private val loadingDialog: LoadingDialog by lazy(LazyThreadSafetyMode.NONE) {
         LoadingDialog(context = requireContext())
     }
+    private var animeToRemoved: Anime? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         requireBinding().recyclerView.adapter = adapter
         requireBinding().back.setOnClickListener(this)
         observeRecourses()
         viewModel.getAllAnime()
-
-
     }
 
     private fun observeRecourses() {
         viewModel.message.observe(viewLifecycleOwner) { showToast(message = it) }
-        viewModel.loadingDialog.observe(viewLifecycleOwner) { showProgress(status = it) }
+        viewModel.loadingDialog.observe(viewLifecycleOwner) {
+            showProgress(status = it)
+        }
         viewModel.recourse.observe(viewLifecycleOwner) { recourse ->
             when (recourse.status) {
                 Status.LOADING -> {
@@ -60,12 +57,12 @@ class FavoriteFragment :
                 }
                 Status.SUCCESS -> {
                     showUi()
-                    adapter.favoriteAnimeList = recourse.data!!
+                    adapter.favoriteAnimeList = recourse.data!!.toMutableList()
                     if (recourse.data.isEmpty()) requireBinding().recyclerView.adapter =
                         noFavAdapter
                 }
                 Status.ERROR -> {
-                    findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
+                    viewModel.goBack()
                     showToast(message = recourse.message!!)
                 }
             }
@@ -80,7 +77,10 @@ class FavoriteFragment :
 
     private fun showProgress(status: Boolean) {
         if (status) loadingDialog.show()
-        else loadingDialog.dismiss()
+        else {
+            adapter.deleteItem(item = animeToRemoved!!)
+            loadingDialog.dismiss()
+        }
     }
 
     private fun showUi() {
@@ -91,19 +91,18 @@ class FavoriteFragment :
         }
     }
 
-    override fun delete(objectId: String) {
-        viewModel.deleteAnimeFavorite(objectId = objectId)
+    override fun delete(anime: Anime) {
+        animeToRemoved = anime
+        viewModel.deleteAnimeFavorite(objectId = anime.objectId!!)
     }
 
     override fun showAnimeInfo(anime: Anime) {
-        findNavController().navigate(R.id.action_favoriteFragment_to_animeInfoFragment,
-            bundleOf(ANIME_KEY to anime, BACK_TYRE_KEY to AssistantNav.INFO_TO_FAVORITE))
+        viewModel.goAnimeInfoFragment(anime = anime)
     }
 
     override fun onClick(view: View?) {
         when (view) {
-            requireBinding().back -> findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
+            requireBinding().back -> viewModel.goBack()
         }
     }
-
 }

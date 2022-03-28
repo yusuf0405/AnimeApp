@@ -4,18 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.animeapp.R
-import com.example.animeapp.app.base.BaseBindingFragment
-import com.example.animeapp.app.utils.cons.ANIME_KEY
-import com.example.animeapp.app.utils.cons.BACK_TYRE_KEY
-import com.example.animeapp.app.utils.assistant_nav.AssistantNav
+import com.example.animeapp.app.base.BaseFragment
 import com.example.animeapp.app.utils.click_listener.AnimeOnClickListener
 import com.example.animeapp.app.utils.loader.LoaderStateAdapter
 import com.example.animeapp.databinding.FragmentSearchBinding
@@ -23,17 +17,22 @@ import com.example.animeapp.screen_home.domain.models.Anime
 import com.example.animeapp.screen_home.presentation.adapters.AnimeAdapter
 import com.example.animeapp.screen_search.presentation.adapters.NoDataAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.*
 
 @ExperimentalCoroutinesApi
 @DelicateCoroutinesApi
 @AndroidEntryPoint
-class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
+class SearchFragment :
+    BaseFragment<FragmentSearchBinding, SearchViewModel>(FragmentSearchBinding::inflate),
     AnimeOnClickListener, SearchView.OnQueryTextListener {
 
-    private val viewModel: SearchViewModel by viewModels()
+    override val viewModel: SearchViewModel by viewModels()
+
+    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val adapter: AnimeAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AnimeAdapter(actionListener = this)
@@ -51,9 +50,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(FragmentSearch
         lifecycleScope.launch { viewModel.searchFlow.collectLatest(adapter::submitData) }
 
 
-        requireBinding().backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
-        }
+        requireBinding().backButton.setOnClickListener { viewModel.goBack() }
 
         adapter.addLoadStateListener { state ->
             if (state.refresh is LoadState.Error)
@@ -66,8 +63,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(FragmentSearch
     }
 
     override fun showAnimeInfo(anime: Anime) {
-        findNavController().navigate(R.id.action_searchFragment_to_animeInfoFragment,
-            bundleOf(ANIME_KEY to anime, BACK_TYRE_KEY to AssistantNav.INFO_TO_SEARCH))
+        viewModel.goAnimeInfoFragment(anime = anime)
     }
 
     override fun onQueryTextSubmit(searchText: String?): Boolean {

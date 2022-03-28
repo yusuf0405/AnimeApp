@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:transitionGroup="true">
+    android:orientation="vertical">
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout"
@@ -41,23 +40,33 @@
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
             android:text="@string/discover"
-            android:textColor="@color/home_header"
             android:textSize="36sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/setting"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            app:layout_constraintBottom_toBottomOf="@+id/favorite"
+            app:layout_constraintEnd_toStartOf="@+id/favorite"
+            app:layout_constraintTop_toTopOf="@+id/favorite" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/search"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:background="?selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"
             android:clickable="true"
             android:focusable="true"
             android:padding="10dp"
             android:src="@drawable/ic_search"
-            android:transitionName="@string/search_transition"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,13 +75,12 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
             android:padding="10dp"
             android:src="@drawable/ic_favorite"
-            android:transitionName="@string/favourite_transition"
             app:layout_constraintBottom_toBottomOf="@+id/search"
             app:layout_constraintEnd_toStartOf="@id/search"
             app:layout_constraintTop_toTopOf="parent" />
